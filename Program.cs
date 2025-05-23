@@ -141,7 +141,85 @@ app.MapPost("/activar", async (HttpContext http, GymvaDbContext db) =>
             return Results.BadRequest("Token inválido o ya utilizado.");
 
         if (usuario.fecha_expiracion < DateTime.UtcNow)
-            return Results.BadRequest("Token expirado. Solicita uno nuevo.");
+            return Results.Content(@"
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Token inválido</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://raw.githubusercontent.com/FJAO87/GymvaActivacionWeb/main/fondo_gym.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+    }
+    .container {
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 40px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+    }
+    img {
+      width: 80px;
+      margin-bottom: 10px;
+    }
+    .brand {
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #00CFFF;
+      margin-bottom: 20px;
+    }
+    .error-icon {
+      font-size: 60px;
+      color: #ff5555;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 16px;
+      color: #ddd;
+      margin-bottom: 30px;
+    }
+    a.button {
+      background-color: #00CFFF;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      font-weight: bold;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    a.button:hover {
+      background-color: #00b5e5;
+    }
+  </style>
+</head>
+<body>
+  <div class='container'>
+    <img src='https://raw.githubusercontent.com/FJAO87/GymvaActivacionWeb/main/logo.png' alt='Gymva Logo'>
+    <div class='brand'>GYMVA</div>
+    <div class='error-icon'>❌</div>
+    <h2>Este enlace ya ha sido utilizado</h2>
+    <p>Este token ya fue validado o ha expirado. Si necesitas ayuda, contacta con soporte o vuelve a registrarte.</p>
+    <a href='https://gymva.com' class='button'>Ir a la página principal</a>
+  </div>
+</body>
+</html>
+", "text/html");
 
         usuario.contrasena_hash = BCrypt.Net.BCrypt.HashPassword(password);
         usuario.activo = true;
