@@ -25,11 +25,11 @@ app.MapGet("/activar", async (HttpContext http) =>
 
     return Results.Content($@"
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='es'>
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Activate Gymva</title>
+    <title>Activar cuenta - Gymva</title>
     <style>
         body {{
             margin: 0;
@@ -37,14 +37,14 @@ app.MapGet("/activar", async (HttpContext http) =>
             font-family: 'Segoe UI', sans-serif;
             background: url('https://images.unsplash.com/photo-1571019613578-2b58f16451be?auto=format&fit=crop&w=1280&q=80') no-repeat center center fixed;
             background-size: cover;
-            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            color: white;
         }}
         .container {{
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.75);
             padding: 40px;
             border-radius: 15px;
             width: 90%;
@@ -52,7 +52,7 @@ app.MapGet("/activar", async (HttpContext http) =>
             text-align: center;
         }}
         img {{
-            width: 70px;
+            width: 80px;
             margin-bottom: 20px;
         }}
         h2 {{
@@ -91,15 +91,14 @@ app.MapGet("/activar", async (HttpContext http) =>
 </head>
 <body>
     <div class='container'>
-        <img src='https://raw.githubusercontent.com/FJAO87/GymvaActivacionWeb/main/logo.png' alt='Gymva Logo' />
-        <h2>Activate Your Account</h2>
-        <p>Set your new password below</p>
+        <img src='https://raw.githubusercontent.com/FJAO87/GymvaActivacionWeb/main/logo.png' alt='Gymva Logo'>
+        <h2>Activar cuenta de gimnasio</h2>
         <form method='post' action='/activar'>
             <input type='hidden' name='token' value='{token}' />
-            <input type='password' name='password' placeholder='New Password' required/>
-            <button type='submit'>Activate Account</button>
+            <input type='password' name='password' placeholder='Nueva contraseña' required/>
+            <button type='submit'>Activar cuenta</button>
         </form>
-        <p>Didn’t receive a code? Check spam or register again</p>
+        <p>Este formulario está vinculado a tu activación Gymva.</p>
     </div>
 </body>
 </html>
