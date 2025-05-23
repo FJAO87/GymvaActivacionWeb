@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GymvaActivacionWeb/Models/Usuario.cs
+namespace GymvaActivacionWeb.Models
 {
     public class Usuario
     {

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using GymvaActivacionWeb.Models;
 
-namespace GymvaActivacionWeb.Data/GymvaDbContext.cs
+namespace GymvaActivacionWeb.Data
 {
     public class GymvaDbContext : DbContext
     {
