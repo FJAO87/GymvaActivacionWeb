@@ -23,84 +23,103 @@ app.MapGet("/activar", async (HttpContext http) =>
     if (string.IsNullOrWhiteSpace(token))
         return Results.BadRequest("Token inválido");
 
-    return Results.Content($@"
+    return Results.Content(@"
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='es'>
 <head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Activate Gymva</title>
-    <style>
-        body {{
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: url('https://images.unsplash.com/photo-1571019613578-2b58f16451be?auto=format&fit=crop&w=1280&q=80') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }}
-        .container {{
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 40px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-        }}
-        img {{
-            width: 70px;
-            margin-bottom: 20px;
-        }}
-        h2 {{
-            font-size: 26px;
-            margin-bottom: 10px;
-        }}
-        input {{
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            border: none;
-            font-size: 16px;
-        }}
-        button {{
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            background-color: #d6452c;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }}
-        button:hover {{
-            background-color: #b5381f;
-        }}
-        p {{
-            margin-top: 20px;
-            font-size: 14px;
-            color: #ccc;
-        }}
-    </style>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Activar cuenta - Gymva</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://raw.githubusercontent.com/FJAO87/GymvaActivacionWeb/main/fondo_gym.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+    }
+    .container {
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 40px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+    img {
+      width: 80px;
+      margin-bottom: 10px;
+    }
+    .brand {
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: white;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background-color: #00CFFF;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #00b5e5;
+    }
+    p {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #ccc;
+    }
+  </style>
 </head>
 <body>
-    <div class='container'>
-        <img src='https://raw.githubusercontent.com/FJAO87/GymvaActivacionWeb/main/logo.png' alt='Gymva Logo' />
-        <h2>Activate Your Account</h2>
-        <p>Set your new password below</p>
-        <form method='post' action='/activar'>
-            <input type='hidden' name='token' value='{token}' />
-            <input type='password' name='password' placeholder='New Password' required/>
-            <button type='submit'>Activate Account</button>
-        </form>
-        <p>Didn’t receive a code? Check spam or register again</p>
-    </div>
+  <div class='container'>
+    <img src='https://raw.githubusercontent.com/FJAO87/GymvaActivacionWeb/main/logo.png' alt='Gymva Logo'>
+    <div class='brand'>GYMVA</div>
+    <h2>Activar cuenta de gimnasio</h2>
+    <form method='post' action='/activar' onsubmit='return validarContrasenas()'>
+      <input type='hidden' name='token' value='{token}' />
+      <input type='password' id='password' name='password' placeholder='Nueva contraseña' required/>
+      <input type='password' id='confirmPassword' placeholder='Confirmar contraseña' required/>
+      <button type='submit'>Activar cuenta</button>
+    </form>
+    <p>Este formulario está vinculado a tu activación Gymva.</p>
+  </div>
+  <script>
+    function validarContrasenas() {
+      const pass = document.getElementById('password').value;
+      const confirm = document.getElementById('confirmPassword').value;
+      if (pass !== confirm) {
+        alert('Las contraseñas no coinciden.');
+        return false;
+      }
+      return true;
+    }
+  </script>
 </body>
 </html>
 ", "text/html");
@@ -171,7 +190,7 @@ app.MapPost("/activar", async (HttpContext http, GymvaDbContext db) =>
       font-size: 22px;
       font-weight: bold;
       letter-spacing: 2px;
-      color: #00CFFF;
+      color: white;
       margin-bottom: 20px;
     }
     .success-icon {
