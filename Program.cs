@@ -135,7 +135,8 @@ app.MapPost("/activar", async (HttpContext http, GymvaDbContext db) =>
 
         await db.SaveChangesAsync();
 
-        return Results.Content(@"<!DOCTYPE html>
+        return Results.Content(@"
+<!DOCTYPE html>
 <html lang='es'>
 <head>
   <meta charset='UTF-8'>
@@ -212,9 +213,8 @@ app.MapPost("/activar", async (HttpContext http, GymvaDbContext db) =>
   </div>
 </body>
 </html>
-"), 
-            "text/html"           
-            );
+", "text/html");
+
     }
     catch (Exception ex)
     {
