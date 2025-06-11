@@ -200,7 +200,6 @@ app.MapGet("/activado", () =>
     <div class='success-icon'>✅</div>
     <h2>Cuenta activada correctamente</h2>
     <p>Ya puedes iniciar sesión en el programa Gymva con tu nueva contraseña.</p>
-    <a href='#' class='button'>Abrir Gymva</a>
   </div>
 </body>
 </html>", "text/html");
